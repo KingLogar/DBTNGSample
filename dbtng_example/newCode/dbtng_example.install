@@ -4,77 +4,67 @@ function db_init() {
   // Add a default entry.
   $fields = array(
     'name'    => 'Hail',
-    'surname' => 'Hyrda',
+    'surname' => 'Hydra',
     'age'     => 100,
   );
-  db_insert('dbtng_example')
+  db_insert('dbtng_sample')
     ->fields($fields)
     ->execute();
 
   // Add another entry.
   $fields = array(
-    'name'    => 'John',
-    'surname' => 'Roe',
-    'age'     => 100,
+    'name'    => 'Ronald',
+    'surname' => 'McDonald',
+    'age'     => 127,
     'uid'     => 1,
   );
-  db_insert('dbtng_example')
+  db_insert('dbtng_sample')
     ->fields($fields)
     ->execute();
 }
 
-/**
- * Implements hook_schema().
- *
- * Defines the database tables used by this module.
- * Remember that the easiest way to create the code for hook_schema is with
- * the @link http://drupal.org/project/schema schema module @endlink
- *
- * @see hook_schema()
- * @ingroup dbtng_example
- */
-function dbtng_example_schema() {
+function dbtng_sample_schema() {
 
-  $schema['dbtng_example'] = array(
-    'description' => 'Stores example person entries for demonstration purposes.',
+  $schema['dbtng_sample'] = array(
+    'description' => 'Stores user information.',
     'fields' => array(
       'pid'  => array(
         'type' => 'serial',
         'not null' => TRUE,
-        'description' => 'Primary Key: Unique person ID.',
+        'description' => 'Unique user id used by the table.',
       ),
       'uid' => array(
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
-        'description' => "Creator user's {users}.uid",
+        'description' => "Personal id per user.",
       ),
-      'name' => array(
+      'fname' => array(
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Name of the person.',
+        'description' => 'User's first name.',
       ),
-      'surname' => array(
+      'lname' => array(
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Surname of the person.',
+        'description' => 'User's last name.',
       ),
       'age' => array(
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
         'size' => 'tiny',
-        'description' => 'The age of the person in years.',
+        'description' => 'The user's age.',
       ),
     ),
     'primary key' => array('pid'),
     'indexes' => array(
-      'name'    => array('name'),
-      'surname' => array('surname'),
+      'fname'    => array('fname'),
+      'lname' => array('lname'),
       'age'     => array('age'),
     ),
   );
