@@ -44,7 +44,7 @@ function dbtng_sample_schema() {
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'User's first name.',
+        'description' => 'Users first name.',
       ),
       'lname' => array(
         'type' => 'varchar',
