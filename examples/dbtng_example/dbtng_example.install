@@ -1,13 +1,22 @@
 <?php
+/**
+ * @file
+ * Install, update and uninstall functions for the dbtng_example module.
+ */
 
-function db_init() {
+/**
+ * @see hook_install()
+ *
+ * @ingroup dbtng_example
+ */
+function dbtng_example_install() {
   // Add a default entry.
   $fields = array(
-    'name'    => 'Hail',
-    'surname' => 'Hydra',
-    'age'     => 100,
+    'name'    => 'Richard',
+    'surname' => 'Nixon',
+    'age'     => 0,
   );
-  db_insert('dbtng_sample')
+  db_insert('dbtng_example')
     ->fields($fields)
     ->execute();
 
@@ -15,56 +24,60 @@ function db_init() {
   $fields = array(
     'name'    => 'Ronald',
     'surname' => 'McDonald',
-    'age'     => 127,
+    'age'     => 100,
     'uid'     => 1,
   );
-  db_insert('dbtng_sample')
+  db_insert('dbtng_example')
     ->fields($fields)
     ->execute();
 }
 
-function dbtng_sample_schema() {
+/**
+ * @see hook_schema()
+ * @ingroup dbtng_example
+ */
+function dbtng_example_schema() {
 
-  $schema['dbtng_sample'] = array(
-    'description' => 'Stores user information.',
+  $schema['dbtng_example'] = array(
+    'description' => 'Stores example person entries for demonstration purposes.',
     'fields' => array(
       'pid'  => array(
         'type' => 'serial',
         'not null' => TRUE,
-        'description' => 'Unique user id used by the table.',
+        'description' => 'Primary Key: Unique person ID.',
       ),
       'uid' => array(
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
-        'description' => "Personal id per user.",
+        'description' => "Creator user's {users}.uid",
       ),
-      'fname' => array(
+      'name' => array(
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Users first name.',
+        'description' => 'Name of the person.',
       ),
-      'lname' => array(
+      'surname' => array(
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Users last name.',
+        'description' => 'Surname of the person.',
       ),
       'age' => array(
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
         'size' => 'tiny',
-        'description' => 'The users age.',
+        'description' => 'The age of the person in years.',
       ),
     ),
     'primary key' => array('pid'),
     'indexes' => array(
-      'fname'    => array('fname'),
-      'lname' => array('lname'),
+      'name'    => array('name'),
+      'surname' => array('surname'),
       'age'     => array('age'),
     ),
   );

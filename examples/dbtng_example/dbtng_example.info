@@ -1,0 +1,7 @@
+name = DBTNG Sample
+description = Sample Module for IS 373
+package = Sample modules
+core = 7.x
+files[] = dbtng_example.test
+
+
